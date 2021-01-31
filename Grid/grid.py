@@ -11,7 +11,7 @@ class Grid:
         n: width/columns
         """
         self.rows, self.columns = m, n
-        self.grid = [["■" for j in range(n)] for i in range(m)]
+        self.grid = [["normal" for j in range(n)] for i in range(m)]
 
     def show(self):
         """
@@ -32,7 +32,11 @@ class Grid:
         """
         for coordinate in coordinates:
             i, j = coordinate
-            self.grid[i][j] = "□"
+            self.grid[i][j] = "wall"
+
+    def change_type(self, type, i, j):
+        self.grid[i][j] = type
+        self.show()
 
 
 if __name__ == "__main__":
