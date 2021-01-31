@@ -33,9 +33,11 @@ class Square(QLabel):
 
     def __init__(self, parent, type="normal", x=None, y=None):
         super().__init__(parent)
+        self.setMinimumHeight(5)
+        self.setMinimumWidth(5)
         self.type = type
         self.type_deque = deque(self.types.keys())
-        self.setStyleSheet(f"background-color: {self.types[type]};")
+        self.setStyleSheet(f"background-color: {self.types[type]}; border: 0px;")
         self.x = x
         self.y = y
 
@@ -46,7 +48,7 @@ class Square(QLabel):
     @type.setter
     def type(self, value):
         self._type = value
-        self.setStyleSheet(f"background-color: {self.types[value]};")
+        self.setStyleSheet(f"background-color: {self.types[value]}; border: 0px;")
         self.parent().parent().senal_cambiar_estilo.emit(value, self.x, self.y)
 
     def mousePressEvent(self, event):

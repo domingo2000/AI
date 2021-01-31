@@ -5,7 +5,7 @@ import sys
 
 if __name__ == "__main__":
     app = QApplication([])
-    grid = Grid(4, 8)
+    grid = Grid(50, 50)
     window = GridWindow(grid.rows, grid.columns)
 
     #  Conexion de Señales

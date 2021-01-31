@@ -36,7 +36,6 @@ class Grid:
 
     def change_type(self, type, i, j):
         self.grid[i][j] = type
-        self.show()
 
 
 if __name__ == "__main__":
