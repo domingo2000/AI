@@ -87,5 +87,25 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>button_solve</sender>
+   <signal>clicked()</signal>
+   <receiver>GridWindow</receiver>
+   <slot>solve_grid()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>725</x>
+     <y>347</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>404</x>
+     <y>314</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>solve_grid()</slot>
+ </slots>
 </ui>

@@ -11,25 +11,47 @@ class GridWindow(QWidget):
 
     #  Signals
     senal_cambiar_estilo = pyqtSignal(str, int, int)
+    senal_llamar_vecinos = pyqtSignal(int, int)
+    senal_resolver_camino = pyqtSignal(str)
 
     def __init__(self, m, n):
         super(GridWindow, self).__init__()
         uic.loadUi('grid_solver.ui', self)
+        self.squares = {}
         self.init_grid(m, n)
         self.show()
 
     def init_grid(self, m, n):
         for i in range(m):
             for j in range(n):
-                square = Square(self.grid_frame, x=i, y=j)
+                square = Square(self.grid_frame, x=j, y=i)
+                self.squares[f"{j},{i}"] = square
                 self.grid_frame.layout().addWidget(square, i, j)
+
+    def solve_grid(self):
+        self.senal_resolver_camino.emit(self.algorithm.currentText().upper())
+
+    def paint_path(self, coordinate):
+        x, y = coordinate
+        self.squares[f"{x},{y}"].type = "path"
+
+    def paint_frontier(self, coordinates):
+        for coordinate in coordinates:
+            x, y = coordinate
+            self.squares[f"{x},{y}"].type = "frontier"
+
+    def paint_solution(self, coordinates):
+        for coordinate in coordinates:
+            x, y = coordinate
+            self.squares[f"{x},{y}"].type = "solution"
 
 
 class Square(QLabel):
     """
     Defines each square of the grid, it can be swaped from normal, wall, start, goal
     """
-    types = {"wall": "black", "goal": "green", "start": "red", "normal": "white"}
+    types = {"wall": "black", "goal": "green", "start": "red", "path": "yellow",
+             "frontier": "purple", "solution": "blue", "normal": "white"}
 
     def __init__(self, parent, type="normal", x=None, y=None):
         super().__init__(parent)
