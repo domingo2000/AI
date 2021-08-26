@@ -1,13 +1,18 @@
 from collections import deque
+import parameters.parameters_search as p
 
 
 class Queue(deque):
 
     def __init__(self, iterable=[], maxlen=None) -> None:
         super().__init__(iterable=iterable, maxlen=maxlen)
+        self.items_added = 0
 
     def append(self, x):
         super().appendleft(x)
+        self.items_added += 1
+        if self.items_added % p.COLLECTION_STEP_PRINT == 0:
+            print("Items added:", self.items_added)
 
     def pop(self):
         x = super().pop()
@@ -18,9 +23,14 @@ class Stack(deque):
 
     def __init__(self, iterable=[], maxlen=None) -> None:
         super().__init__(iterable=iterable, maxlen=maxlen)
+        self.items_added = 0
 
     def append(self, x):
         super().append(x)
+
+        self.items_added += 1
+        if self.items_added % p.COLLECTION_STEP_PRINT == 0:
+            print("Items added:", self.items_added)
 
     def pop(self):
         x = super().pop()
