@@ -13,7 +13,7 @@ class Game:
         self.pos_0 = None
 
         self.make_board(board)  # Makes the self.board attribute
-        
+
         if not board:
             self.shuffle_board()
 
@@ -122,7 +122,7 @@ class Game:
         Updates the board given the action (direcction)
         Direction keys = ["UP", "DOWN", "LEFT", "RIGHT"]
         """
-        
+
         # Get the position of the 0
         i = self.pos_0[0]
         j = self.pos_0[1]
@@ -199,7 +199,6 @@ class Game:
 
 
 class SlidePuzzleProblem(Problem):
-
 
     def __init__(self, game):
         # Extra attributes of this specific problem
@@ -294,6 +293,7 @@ def print_state(state):
         print(row)
     print("-" * ((n) * format_space_size + 2))
 
+
 if __name__ == "#__main__":
     import parameters as p
     game = Game(p.board_size)
@@ -304,19 +304,21 @@ if __name__ == "#__main__":
     #
 
 if __name__ == "__main__":
-    print("Comenzando Programa [ok]")
     from slide_puzzle import Game
+
+    print("Comenzando Programa [ok]")
+
     game = Game(p.board_size)
     problem = SlidePuzzleProblem(game)
+    solver = Solver()
+
     print("Initial State:")
     game.print2_board(problem.initial_state)
-    # print("DEBUG", game.board)
+
     print("Problem Goal:")
     game.print2_board(problem.goal)
 
-    solver = Solver()
-    #path = solver.bfs_solve(problem)
-    path = solver.generic_solve(problem, algorithm="BFS")
+    path = solver.generic_solve(problem, algorithm=p.ALGORITHM_SOLVER)
 
     print("############################################")
     print("############################################")
