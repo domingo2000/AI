@@ -1,2 +1,3 @@
-max_step = 1000000
+max_step = 100000
 step_print = 1000
+COLLECTION_STEP_PRINT = 1000

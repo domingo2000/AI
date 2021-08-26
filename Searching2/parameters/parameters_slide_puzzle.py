@@ -1,2 +1,3 @@
-board_size = 4
-shuffling_number = 12
+board_size = 3
+shuffling_number = 60
+ALGORITHM_SOLVER = "BFS"
