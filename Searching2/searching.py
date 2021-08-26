@@ -99,14 +99,18 @@ class Solver:
             explored.append(node.state)
             for action in problem.actions(node.state):  # Expands the node by the actions
                 child = self.child_node(problem, node, action)
-                if (child.state not in explored) or (child not in frontier):
+                if (child.state not in explored) and (child not in frontier):
                     if problem.goal_test(child.state):  # Checks the goal for the current childs
                         return self.solution(child)
-                    frontier.appendleft(child)
+                    frontier.append(child)
 
-            if (step % p.step_print) == 0:  # Show steps when reach some interval
-                print("STEP=", step)
+            # if (step % p.step_print) == 0:  # Show steps when reach some interval
+            #     print("STEP=", step)
             if step >= p.max_step:  # Stops the searching at given step
+                print("-----FRONTIER-------")
+                print([(node.state) for node in frontier])
+                print("-----EXPLORED-------")
+                print(explored)
                 break
             step += 1
 
